@@ -2,10 +2,9 @@ from __future__ import annotations
 import os, io, json, time, base64, textwrap
 from datetime import datetime
 from typing import Optional
-
 import streamlit as st
 from PIL import Image
-
+    
 # ── Local utils ───────────────────────────────────────────────────────────────
 from utils.trending import get_trending_topics, PRESET_CATEGORIES, PLATFORM_FORMATS
 from utils.prompt_builder import (
@@ -29,6 +28,13 @@ from utils.social_poster import (
     post_to_instagram,
     summarise_results,
 )
+@st.cache_data(show_spinner=False)
+def _get_platform_names():
+    return list(PLATFORM_FORMATS.keys())
+
+@st.cache_data(show_spinner=False)  
+def _get_style_names():
+    return list(STYLE_PRESETS.keys())
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
