@@ -2,7 +2,10 @@ from __future__ import annotations
 import requests
 import json
 from datetime import datetime
+import streamlit as st
 
+@st.cache_data(ttl=3600)   # cache for 1 hour
+def get_trending_topics(n: int = 12, category: str | None = None) -> list[dict]:
 # ── Static curated presets ────────────────────────────────────────────────────
 PRESET_CATEGORIES: dict[str, list[str]] = {
     "🔥 Lifestyle": [
